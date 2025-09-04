@@ -124,7 +124,17 @@ try {
 }
 
 // ---------- Helpers & mock data ----------
-const tenseGroups: Record<string, { key: string; name: string; pattern: string; example: string }[]> = {
+type Zone = "Past" | "Present" | "Future";
+
+interface Tense {
+  key: string;
+  name: string;
+  pattern: string;
+  example: string;
+  zone: Zone;
+}
+
+const tenseGroups: Record<Zone, { key: string; name: string; pattern: string; example: string }[]> = {
   Past: [
     { key: "past_simple", name: "Past Simple", pattern: "S + V2", example: "I walked to school yesterday." },
     { key: "past_cont", name: "Past Continuous", pattern: "S + was/were + V-ing", example: "I was walking when it rained." },
@@ -279,8 +289,8 @@ function Sidebar({ current, onChange }: { current: string; onChange: (k: string)
 }
 
 // ---------- Module 1: The Core ----------
-function MindMap({ onPickTense }: { onPickTense: (t: any) => void }) {
-  const [zone, setZone] = useState<"Past" | "Present" | "Future" | null>(null);
+function MindMap({ onPickTense }: { onPickTense: (t: Tense) => void }) {
+  const [zone, setZone] = useState<Zone | null>(null);
   return (
     <Card className="overflow-hidden">
       <CardHeader>
@@ -323,7 +333,7 @@ function MindMap({ onPickTense }: { onPickTense: (t: any) => void }) {
                 {tenseGroups[zone].map((t) => (
                   <div
                     key={t.key}
-                    onClick={() => onPickTense({ ...t, zone })}
+                    onClick={() => onPickTense({ ...t, zone: zone as Zone })}
                     className="group cursor-pointer rounded-2xl border p-4 hover:shadow-md hover:-translate-y-0.5 transition bg-white"
                   >
                     <div className="text-xs text-zinc-400 uppercase tracking-wider">{zone}</div>
@@ -359,7 +369,7 @@ function Branch({ label, color, onClick }: { label: string; color: "emerald" | "
   );
 }
 
-function TenseInfo({ tense, onSpeak }: { tense: any; onSpeak: (text: string) => void }) {
+function TenseInfo({ tense, onSpeak }: { tense: Tense | null; onSpeak: (text: string) => void }) {
   if (!tense) return null;
   return (
     <Card>
@@ -836,10 +846,10 @@ function speak(text: string) {
 // ---------- Page ----------
 export default function App() {
   const [tab, setTab] = useState("core");
-  const [pickedTense, setPickedTense] = useState<any | null>(null);
+  const [pickedTense, setPickedTense] = useState<Tense | null>(null);
   const [deck, setDeck] = useState<FlashCard[]>([]);
-  const [convCount, setConvCount] = useState(1);
-  const [journalCount, setJournalCount] = useState(0);
+  const [convCount] = useState(1);
+  const [journalCount] = useState(0);
 
   return (
     <div className="min-h-dvh bg-gradient-to-b from-zinc-50 to-white text-zinc-900">
