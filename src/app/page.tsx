@@ -30,6 +30,110 @@ import {
 } from "lucide-react";
 
 // If shadcn/ui is available in this environment, use it. Otherwise, fall back to simple primitives.
+
+export function Button(
+  { className = "", ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>
+): JSX.Element {
+  return (
+    <button
+      {...props}
+      className={
+        "inline-flex items-center gap-2 rounded-2xl px-4 py-2 shadow-sm border border-black/5 bg-white hover:bg-zinc-50 active:scale-[.99] transition " +
+        className
+      }
+    />
+  );
+}
+
+export function Card({
+  className = "",
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+  return (
+    <div {...props} className={"rounded-3xl border bg-white shadow-sm " + className} />
+  );
+}
+
+export function CardHeader({
+  className = "",
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+  return <div {...props} className={"p-5 border-b " + className} />;
+}
+
+export function CardTitle({
+  className = "",
+  ...props
+}: React.HTMLAttributes<HTMLHeadingElement>): JSX.Element {
+  return <h3 {...props} className={"text-lg font-semibold " + className} />;
+}
+
+export function CardContent({
+  className = "",
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+  return <div {...props} className={"p-5 " + className} />;
+}
+
+export function Input({
+  className = "",
+  ...props
+}: React.InputHTMLAttributes<HTMLInputElement>): JSX.Element {
+  return (
+    <input
+      {...props}
+      className={
+        "w-full rounded-2xl border px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-200 " +
+        className
+      }
+    />
+  );
+}
+
+export function Textarea({
+  className = "",
+  ...props
+}: React.TextareaHTMLAttributes<HTMLTextAreaElement>): JSX.Element {
+  return (
+    <textarea
+      {...props}
+      className={
+        "w-full rounded-2xl border px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-200 min-h-[120px] " +
+        className
+      }
+    />
+  );
+}
+
+export function Badge({
+  className = "",
+  ...props
+}: React.HTMLAttributes<HTMLSpanElement>): JSX.Element {
+  return (
+    <span
+      {...props}
+      className={
+        "inline-flex items-center px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs " +
+        className
+      }
+    />
+  );
+}
+
+export function Separator({
+  className = "",
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+  return <div {...props} className={"h-px bg-zinc-200 " + className} />;
+}
+
+export function ScrollArea({
+  className = "",
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+  return <div {...props} className={"overflow-auto " + className} />;
+}
+
 let ui = {} as any;
 try {
   // @ts-ignore
@@ -70,57 +174,16 @@ try {
   };
 } catch (e) {
   // soft fallback primitives
-  ui.Button = ({ className = "", ...p }: any) => (
-    <button
-      {...p}
-      className={
-        "inline-flex items-center gap-2 rounded-2xl px-4 py-2 shadow-sm border border-black/5 bg-white hover:bg-zinc-50 active:scale-[.99] transition " +
-        className
-      }
-    />
-  );
-  ui.Card = ({ className = "", ...p }: any) => (
-    <div {...p} className={"rounded-3xl border bg-white shadow-sm " + className} />
-  );
-  ui.CardHeader = ({ className = "", ...p }: any) => (
-    <div {...p} className={"p-5 border-b " + className} />
-  );
-  ui.CardTitle = ({ className = "", ...p }: any) => (
-    <h3 {...p} className={"text-lg font-semibold " + className} />
-  );
-  ui.CardContent = ({ className = "", ...p }: any) => (
-    <div {...p} className={"p-5 " + className} />
-  );
-  ui.Input = ({ className = "", ...p }: any) => (
-    <input
-      {...p}
-      className={
-        "w-full rounded-2xl border px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-200 " +
-        className
-      }
-    />
-  );
-  ui.Textarea = ({ className = "", ...p }: any) => (
-    <textarea
-      {...p}
-      className={
-        "w-full rounded-2xl border px-3 py-2 outline-none focus:ring-2 focus:ring-indigo-200 min-h-[120px] " +
-        className
-      }
-    />
-  );
-  ui.Badge = ({ className = "", ...p }: any) => (
-    <span
-      {...p}
-      className={"inline-flex items-center px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs " + className}
-    />
-  );
-  ui.Separator = ({ className = "", ...p }: any) => (
-    <div {...p} className={"h-px bg-zinc-200 " + className} />
-  );
-  ui.ScrollArea = ({ className = "", ...p }: any) => (
-    <div {...p} className={"overflow-auto " + className} />
-  );
+  ui.Button = Button;
+  ui.Card = Card;
+  ui.CardHeader = CardHeader;
+  ui.CardTitle = CardTitle;
+  ui.CardContent = CardContent;
+  ui.Input = Input;
+  ui.Textarea = Textarea;
+  ui.Badge = Badge;
+  ui.Separator = Separator;
+  ui.ScrollArea = ScrollArea;
 }
 
 // ---------- Helpers & mock data ----------
