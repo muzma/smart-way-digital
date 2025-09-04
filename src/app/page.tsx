@@ -31,9 +31,9 @@ import {
 
 // If shadcn/ui is available in this environment, use it. Otherwise, fall back to simple primitives.
 
-export function Button(
+function PrimitiveButton(
   { className = "", ...props }: React.ButtonHTMLAttributes<HTMLButtonElement>
-): JSX.Element {
+) {
   return (
     <button
       {...props}
@@ -45,40 +45,40 @@ export function Button(
   );
 }
 
-export function Card({
+function PrimitiveCard({
   className = "",
   ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div {...props} className={"rounded-3xl border bg-white shadow-sm " + className} />
   );
 }
 
-export function CardHeader({
+function PrimitiveCardHeader({
   className = "",
   ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+}: React.HTMLAttributes<HTMLDivElement>) {
   return <div {...props} className={"p-5 border-b " + className} />;
 }
 
-export function CardTitle({
+function PrimitiveCardTitle({
   className = "",
   ...props
-}: React.HTMLAttributes<HTMLHeadingElement>): JSX.Element {
+}: React.HTMLAttributes<HTMLHeadingElement>) {
   return <h3 {...props} className={"text-lg font-semibold " + className} />;
 }
 
-export function CardContent({
+function PrimitiveCardContent({
   className = "",
   ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+}: React.HTMLAttributes<HTMLDivElement>) {
   return <div {...props} className={"p-5 " + className} />;
 }
 
-export function Input({
+function PrimitiveInput({
   className = "",
   ...props
-}: React.InputHTMLAttributes<HTMLInputElement>): JSX.Element {
+}: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       {...props}
@@ -90,10 +90,10 @@ export function Input({
   );
 }
 
-export function Textarea({
+function PrimitiveTextarea({
   className = "",
   ...props
-}: React.TextareaHTMLAttributes<HTMLTextAreaElement>): JSX.Element {
+}: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return (
     <textarea
       {...props}
@@ -105,10 +105,10 @@ export function Textarea({
   );
 }
 
-export function Badge({
+function PrimitiveBadge({
   className = "",
   ...props
-}: React.HTMLAttributes<HTMLSpanElement>): JSX.Element {
+}: React.HTMLAttributes<HTMLSpanElement>) {
   return (
     <span
       {...props}
@@ -120,17 +120,17 @@ export function Badge({
   );
 }
 
-export function Separator({
+function PrimitiveSeparator({
   className = "",
   ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+}: React.HTMLAttributes<HTMLDivElement>) {
   return <div {...props} className={"h-px bg-zinc-200 " + className} />;
 }
 
-export function ScrollArea({
+function PrimitiveScrollArea({
   className = "",
   ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+}: React.HTMLAttributes<HTMLDivElement>) {
   return <div {...props} className={"overflow-auto " + className} />;
 }
 
@@ -174,16 +174,16 @@ try {
   };
 } catch (e) {
   // soft fallback primitives
-  ui.Button = Button;
-  ui.Card = Card;
-  ui.CardHeader = CardHeader;
-  ui.CardTitle = CardTitle;
-  ui.CardContent = CardContent;
-  ui.Input = Input;
-  ui.Textarea = Textarea;
-  ui.Badge = Badge;
-  ui.Separator = Separator;
-  ui.ScrollArea = ScrollArea;
+  ui.Button = PrimitiveButton;
+  ui.Card = PrimitiveCard;
+  ui.CardHeader = PrimitiveCardHeader;
+  ui.CardTitle = PrimitiveCardTitle;
+  ui.CardContent = PrimitiveCardContent;
+  ui.Input = PrimitiveInput;
+  ui.Textarea = PrimitiveTextarea;
+  ui.Badge = PrimitiveBadge;
+  ui.Separator = PrimitiveSeparator;
+  ui.ScrollArea = PrimitiveScrollArea;
 }
 
 // ---------- Helpers & mock data ----------
